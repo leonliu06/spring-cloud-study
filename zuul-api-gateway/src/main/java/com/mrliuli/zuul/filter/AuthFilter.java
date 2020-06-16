@@ -52,6 +52,7 @@ public class AuthFilter extends ZuulFilter {
         if (token == null) {
 
             logger.warn("token is empty");
+            // false：请求不会发送到被调用方，即不调用服务接口，网关直接返回给调用方
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(401);
             try {
