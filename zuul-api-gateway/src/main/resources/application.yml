@@ -23,9 +23,9 @@ zuul:
   # 以/service-producer/开头的请求都转发给service-producer服务，以/consumer/开头的请求都转发给consumer服务
   # zuul 起到了路由的作用
   routes:
-    api-a:
-      path: /service-producer/**
-      serviceId: service-producer
-    api-b:
-      path: /consumer/**
-      serviceId: consumer
+    consul-demo-producer:
+      path: /consul-demo-producer/**
+      serviceId: consul-demo-producer
+    consul-demo-consumer:
+      path: /consul-demo-consumer/**
+      serviceId: consul-demo-consumer
