@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: config-server #注册到consul的服务名称
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+#                     使Consul实例ID唯一，默认情况下，consul实例注册的ID等于其Spring Application Context ID。
+#                     默认情况下，Spring Application Context ID为${spring.application.name}-${server.port}。
+#                     对于大多数情况，这将允许一台服务的多个实例在一台计算机上运行。 如果需要进一步的唯一性，
+#                     使用Spring Cloud可以通过在spring.cloud.consul.discovery.instanceId中提供唯一标识符来覆盖它。
+#                     例如：
+#        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+#    spring cloud config 分配式配置中心组件 server 角色配置 ===================================================== start
+    config:
+      server:
+        git:
+#          分布式配置中心组件 spring cloud config 支持配置信息放在远程 git 仓库中
+#          如远程仓库 https://github.com/leonliu06/spring-cloud-study，仓库中 config-file 路径下有配置文件 consul-demo-consumer-dev.properties
+#          则配置如下
+          uri: https://github.com/leonliu06/spring-cloud-study
+          searchPaths: config-file
+#          git 仓库如是公开仓库，可以不填写用户名和密码，如是私有仓库则需要填写
+          username:
+          password:
+#          label 表示 git 仓库分支
+      label: master
+#      配置服务中心（即当前服务）可以从远程 git 仓库获取配置资源文件信息，配置服务中心通过http请求地址与git仓库资源文件映射来获取配置资源文件
+#      具体映射规则如下：如上述配置文件，则可通过 http://localhost:9111/consul-demo-consumer/dev/master 或 http://localhost:9111/consul-demo-consumer-dev.properties 来访问获取
+#       /{application}/{profile}[/{label}]
+#       /{application}-{profile}.yml
+#       /{label}/{application}-{profile}.yml
+#       /{application}-{profile}.properties
+#       /{label}/{application}-{profile}.properties
+#    spring cloud config 分配式配置中心组件 client 角色配置 ===================================================== end
+
+server:
+  port: 9111
+
