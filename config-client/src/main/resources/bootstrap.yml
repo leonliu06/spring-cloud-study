@@ -21,6 +21,10 @@ spring:
       label: master               # 指明远程仓库的分支
       profile: dev                # 指定某环境配置文件
       uri: http://localhost:9111  # 指明配置服务中心的网址
+# 注意事项：
+# 1 当前服务读取远程git配置文件，按当前服务的 spring.application.name 与 远程 git 中的 配置文件匹配读取，如当前情况下，读取配置文件为 config-client-{profile}.properties
+# 2 关于 spring.cloud.config 的相关配置要放在 bootstrap.yml 文件中，否则会请求默认的config server配置，这是因为当加了配置中心，
+#   服务就要去配置中心获取配置，此时，application.yml 还没有开始加载，bootstrap.yml的加载优先级比application.yml高，bootstrap.yml 是最先加载的。
 #    spring cloud config 分布式配置中心组件 client 角色配置 ===================================================== end
 
 server:
