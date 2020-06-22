@@ -24,6 +24,7 @@ dependencies {
 //    spring cloud config 客户端包
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.boot:spring-boot-starter-web'
+//    Spring Boot Actuator，感应服务端变化
     compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 }
