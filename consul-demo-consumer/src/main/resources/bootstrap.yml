@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: spring-cloud-consul-consumer
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+#        register: false # 设置不需要注册到consul中
+        serviceName: consul-demo-consumer
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+
+#   spring cloud config 读取分布式配置中心配置 =============================== >>> start
+#      以下配置会读取 分布式配置中心 `http://localhost:9111` 的 配置文件 `应用名-dev.properties`
+#      注意读取的配置文件名是以应用名（spring.application.name）开头的文件，不是注册到 consul 的服务名（spring.cloud.consul.discovery.serviceName）
+    config:
+      label: master
+      profile: dev
+      uri: http://localhost:9111
+#   spring cloud config 读取分布式配置中心配置 =============================== >>> end
+
+server:
+  port: 9100
