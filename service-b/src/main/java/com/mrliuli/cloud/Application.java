@@ -18,7 +18,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-
     // 通过 @Bean 注入 RestTemplate
     // 通过 @LoadBalanced 开启负载均衡功能
 
