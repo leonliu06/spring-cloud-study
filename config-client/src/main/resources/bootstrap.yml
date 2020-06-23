@@ -30,3 +30,13 @@ spring:
 server:
   port: 9112
 
+#    实现客户端自动刷新获取服务端最新配置 ===================================================== start
+management:
+  security:
+    shutdown:
+      enabled: false  # 关闭刷新安全认证，springboot 1.5.X 以上默认开通了安全认证，所以需要添加这个配置
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # springboot 2.x 默认只开启了info、health的访问，*代表开启所有访问
+#    实现客户端自动刷新获取服务端最新配置 ===================================================== start
