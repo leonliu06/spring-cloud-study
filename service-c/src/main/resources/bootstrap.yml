@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-c
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: service-c #注册到consul的服务名称
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+#                     使Consul实例ID唯一，默认情况下，consul实例注册的ID等于其Spring Application Context ID。
+#                     默认情况下，Spring Application Context ID为${spring.application.name}-${server.port}。
+#                     对于大多数情况，这将允许一台服务的多个实例在一台计算机上运行。 如果需要进一步的唯一性，
+#                     使用Spring Cloud可以通过在spring.cloud.consul.discovery.instanceId中提供唯一标识符来覆盖它。
+#                     例如：
+#        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+server:
+  port: 9301
