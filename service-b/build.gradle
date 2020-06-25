@@ -25,6 +25,9 @@ dependencies {
 
     implementation 'com.mrliuli:myservice-spring-boot-starter:0.0.1-SNAPSHOT'
 
+//    添加 hystrix 熔断器依赖
+    compile ('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+
 }
 
 dependencyManagement {

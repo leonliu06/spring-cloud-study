@@ -1,6 +1,7 @@
 package com.mrliuli.cloud.service.impl;
 
 import com.mrliuli.cloud.service.IHelloService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,16 @@ public class HelloServiceImpl implements IHelloService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // 通过 restTemplate 来消费 service-a 的 /hello 接口，这里直接用服务名替代了具体的 url 地址，
-    // 在 ribbon 中，它会根据服务名来选择具体的服务实体，根据服务实例在请求的时候会用具体的url替换掉服务名
-
+    /**
+     * 通过 restTemplate 来消费 service-a 的 /hello 接口，这里直接用服务名替代了具体的 url 地址，
+     * 在 ribbon 中，它会根据服务名来选择具体的服务实体，根据服务实例在请求的时候会用具体的url替换掉服务名
+     *
+     * 注解 `HystrixCommand` 创建熔断器功能，并指定了熔断方法 `callOtherServiceFallback`，
+     * 当对特定的服务的调用的不可用达到一个阀值（ Hystric 是5秒20次），断路器将会被打开，可避免连锁故障（“雪崩”效应）。
+     *
+     * @return
+     */
+    @HystrixCommand(fallbackMethod = "callOtherServiceFallback")
     @Override
     public String callOtherService() {
 
@@ -35,5 +43,17 @@ public class HelloServiceImpl implements IHelloService {
 
         return result;
 
+    }
+
+    /**
+     *
+     * 当上面方法调用的 service-a 不可用时，ribbon 就会触发熔断器，来执行此方法快速返回
+     *
+     * 熔断器方法的签名要与
+     *
+     * @return
+     */
+    private String callOtherServiceFallback() {
+        return "error";
     }
 }
