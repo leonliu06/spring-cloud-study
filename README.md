@@ -31,3 +31,8 @@
 2. 过滤器：编写过滤器只需继承抽象类 `ZuulFilter` ，然后实现几个抽象方法就可以了。  
 
 &emsp;&emsp;微服务网关服务工程参看`service-gateway-zuul` 。
+
+
+## 6 分布式配置中心组件 `spring cloud config`
+
+## 7 高可用的分布式配置中心 `spring cloud config`
