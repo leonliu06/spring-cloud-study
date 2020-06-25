@@ -1,12 +1,12 @@
 spring:
   application:
-    name: zuul-api-gateway
+    name: service-gateway-zuul
   cloud:
     consul:
       host: localhost
       port: 8500
       discovery:
-        serviceName: zuul-api-gateway #注册到consul的服务名称
+        serviceName: service-gateway-zuul #注册到consul的服务名称
         healthCheckPath: /actuator/health
         healthCheckInterval: 15s
 #                     使Consul实例ID唯一，默认情况下，consul实例注册的ID等于其Spring Application Context ID。
@@ -19,8 +19,11 @@ spring:
 server:
   port: 9000
 
+#  微服务网关 zuul 的路由配置 =========================================================== >>> start
+#  默认情况即不主动配置路由规则的情况下，`Zuul`会代理所有注册到注册中心如`consul`或`Eureka`上的微服务，且 `Zuul` 的路由规则如下：
+#  `http://ZUUL_HOST:ZULL_PORT/serviceId/**` 会被转发到 `serviceId` 对应的微服务。其中 `serviceId` 指的是微服务注册在注册中心上的 `serviceId` 。
 zuul:
-  # 以/service-producer/开头的请求都转发给service-producer服务，以/consumer/开头的请求都转发给consumer服务
+  # 以/consul-demo-producer/开头的请求都转发给consul-demo-producer服务，以/consul-demo-consumer/开头的请求都转发给consul-demo-consumer服务
   # zuul 起到了路由的作用
   routes:
     consul-demo-producer:
@@ -29,3 +32,4 @@ zuul:
     consul-demo-consumer:
       path: /consul-demo-consumer/**
       serviceId: consul-demo-consumer
+#  微服务网关 zuul 的路由配置 =========================================================== >>> end

@@ -11,11 +11,11 @@ import org.springframework.context.ApplicationContext;
  */
 //@EnableDiscoveryClient
 @SpringBootApplication
-@EnableZuulProxy
-public class ZuulApiGatewayApplication {
+@EnableZuulProxy    // 使应用开启 zuul 功能
+public class Application {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(ZuulApiGatewayApplication.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
         System.out.println(applicationContext.getEnvironment().getProperty("secretKey"));
     }
 
