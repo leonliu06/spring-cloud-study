@@ -1,5 +1,6 @@
 package com.mrliuli.cloud.service;
 
+import com.mrliuli.cloud.service.impl.ICallServiceAFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Feign 整合了 ribbon，具有负载均衡能力
  * 整合了 Hystrix，具有熔断能力
  *
+ * 使用断路器功能：
+ * FeignClient 注解添加 fallback 指定断路器类就可以实现断路器功能，断路器类要实现当前FeignClient接口，并作为 bean 注入到 IOC 中。
+ *
  */
-@FeignClient(value = "service-a")
+@FeignClient(value = "service-a", fallback = ICallServiceAFallback.class)
 public interface ICallServiceA {
 
     /**

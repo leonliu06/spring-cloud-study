@@ -27,6 +27,8 @@ dependencies {
 
 //    添加 feign 依赖
     compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+//    添加 hystrix 熔断器依赖
+    compile ('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
 
 }
 
