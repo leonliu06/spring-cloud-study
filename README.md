@@ -22,12 +22,12 @@
 ### 4.2 在 `service-c` 的 `Fiegn` 调用外部服务方式中使用 `Hystrix`
 &emsp;&emsp;具体看服务消费者 `service-c`
 
+## 5 微服务网关`zuul`
+&emsp;&emsp;微服务架构中，为了避免客户端与多个微服务之间的请求复杂性，需要一个介于客户端和各个微服务器端之间的中间层，这个中间层就是**微服务网关**。Spring Cloud体系中用到的微服务网关是 `Zuul`。微服务网关的主要功能是**路由转发**和**过滤器**。  
 
+1. 路由转发：默认情况下，`Zuul`会代理所有注册到注册中心如`consul`或`Eureka`上的微服务，且 `Zuul` 的路由规则如下：`http://ZUUL_HOST:ZULL_PORT/serviceId/**` 会被转发到 `serviceId` 对应的微服务。其中 `serviceId` 指的是微服务注册在注册中心上的 `serviceId` 。
+    1. 可以进行多种方式的路由配置，如配置需要忽略的服务，配置同时指定微服务的 `serviceId` 和对应路径等
+    2. 可将 `com.netflix` 包的日志级别设为`DEBUG`，这样可以打印路由转发的具体细节，有助于理解 `Zuul` 的路由配置，如 `logging: level: com.netfilx: DEBUG` 。
+2. 过滤器：编写过滤器只需继承抽象类 `ZuulFilter` ，然后实现几个抽象方法就可以了。  
 
-
-
-
-
-
-## 1 网关服务zuul
-### 1.1 新建项目··
+&emsp;&emsp;微服务网关服务工程参看`service-gateway-zuul` 。
