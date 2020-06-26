@@ -20,7 +20,10 @@ spring:
     config:
       label: master               # 指明远程仓库的分支
       profile: prod                # 指定某环境配置文件
-      uri: http://localhost:9111  # 指明配置服务中心的网址
+#      uri: http://localhost:9111  # 指明配置服务中心的网址
+      discovery:
+        enabled: true
+        serviceId: config-server  # 读取配置文件不再通过 ip 地址，而是通过服务名，这样 配置中心服务部署多份时，通过负载均衡达到 配置中心 的高可用
 # 注意事项：
 # 1 当前服务读取远程git配置文件，按当前服务的 spring.application.name 与 远程 git 中的 配置文件匹配读取，如当前情况下，读取配置文件为 config-client-{profile}.properties
 # 2 关于 spring.cloud.config 的相关配置要放在 bootstrap.yml 文件中，否则会请求默认的config server配置，这是因为当加了配置中心，
