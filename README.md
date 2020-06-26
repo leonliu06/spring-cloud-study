@@ -36,3 +36,4 @@
 ## 6 分布式配置中心组件 `spring cloud config`
 
 ## 7 高可用的分布式配置中心 `spring cloud config`
+&emsp;&emsp;将分布式配置中心做成一个微服务 `config-server` ，并集群化，从而达到高可用。
