@@ -36,4 +36,5 @@
 ## 6 分布式配置中心组件 `spring cloud config`
 
 ## 7 高可用的分布式配置中心 `spring cloud config`
-&emsp;&emsp;将分布式配置中心做成一个微服务 `config-server` ，并集群化，从而达到高可用。
+&emsp;&emsp;将分布式配置中心做成一个微服务 `config-server` ，注册到服务注册中心如 `consul`，并集群化，从而达到高可用。
+&emsp;&emsp;需要读取配置中心配置的服务如 `config-client`，就可以只通过配置中心的服务名 `config-server` 来读取配置了，这时如果配置中心服务 `config-server` 部署多份，通过负载均衡，从而高可用。通过配置中心服务名来读取配置参看项目 `config-client`。
