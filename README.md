@@ -8,6 +8,20 @@
 ## 2 服务消费者 `service-b`
 &emsp;&emsp;服务消费者 `service-b` 通过 `RestTemplate + Ribbon` 方式来调用服务生产者 `service-a` 的 `rest` 接口。
 
+### 2.1 Ribbon
+
+&emsp;&emsp;Ribbon是Spring Cloud中的负载均衡客户端，`Spring Cloud Ribbon`会从服务注册中心（`Consul`或`Eureka`）服务器端上获取服务注册信息列表，缓存到本地，实现负载均衡策略。
+
+### 2.2 Ribbon与Nginx的区别
+
+#### 2.2.1 `Nginx`是服务器端负载均衡
+
+&emsp;&emsp;客户端将所有请求统一交给`nginx`，由`nginx`实现负载均衡请求转发，属于服务器端负载均衡。
+
+#### 2.2.2 `Ribbon`是客户端负载均衡
+
+&emsp;&emsp;`Ribbon`是从服务注册中心服务端上获取服务注册信息列表，缓存到要地，然后在本地实现负载均衡策略，即客户端实现负载均衡。
+
 ## 3 服务消费者 `service-c`
 &emsp;&emsp;服务消费者 `service-c` 通过 `Feign` 方式来调用服务生产者 `service-a` 的 `rest` 接口。
 
