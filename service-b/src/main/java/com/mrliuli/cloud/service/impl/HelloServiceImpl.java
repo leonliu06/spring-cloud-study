@@ -49,7 +49,7 @@ public class HelloServiceImpl implements IHelloService {
      *
      * 当上面方法调用的 service-a 不可用时，ribbon 就会触发熔断器，来执行此方法快速返回
      *
-     * 熔断器方法的签名要与
+     * 熔断器方法的签名要与被 @HystriCommand 注解的方法和签名相同
      *
      * @return
      */
