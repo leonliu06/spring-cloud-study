@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  */
 //@EnableDiscoveryClient
 @SpringBootApplication
-@EnableFeignClients // 开启 Feign 功能
+@EnableFeignClients // 开启 Feign 功能，扫描@FeignClient注解的接口作为 bean
 public class Application {
 
     public static void main(String[] args) {
